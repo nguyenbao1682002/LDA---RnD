@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./portainer-data:/data
+    ports:
+      - 9000:9000
+    restart: always
+    networks:
+      - LDA
+      
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: LDA
+      POSTGRES_USER: LDA
+      POSTGRES_PASSWORD: LDA2024
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/postgresql/data
+      - ./postgre/init:/docker-entrypoint-initdb.d
+      # - ./data/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf:ro
+      # - ./data/postgresql.conf:/var/lib/postgresql/data/postgresql.conf:ro
+    restart: always
+    networks:
+      - LDA
+
+networks:
+  LDA:

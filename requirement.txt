@@ -1,0 +1,12 @@
+scikit-learn==1.5.2
+joblib
+schedule
+pyodbc
+python-dotenv
+uvicorn
+fastapi
+pandas
+stable-baselines3
+shimmy
+gym
+geneticalgorithm2
